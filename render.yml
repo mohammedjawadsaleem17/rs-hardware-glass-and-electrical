@@ -4,7 +4,7 @@ services:
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
-    buildCommand: "./gradlew build"
+    # Remove buildCommand - not needed with multi-stage build
     envVars:
       - key: PORT
         value: 8080

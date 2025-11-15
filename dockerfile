@@ -1,14 +1,13 @@
-# 1. Java 17 base image
-FROM eclipse-temurin:17-jdk
-
-# 2. Working directory
+# Stage 1: Build
+FROM eclipse-temurin:17-jdk AS builder
 WORKDIR /app
+COPY . .
+RUN chmod +x ./gradlew
+RUN ./gradlew build -x test
 
-# 3. Copy jar from Gradle build folder
-COPY build/libs/rs-hardware-glass-and-electrical-2.0.0.jar app.jar
-
-# 4. Expose Spring Boot port
+# Stage 2: Runtime
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY --from=builder /app/build/libs/rs-hardware-glass-and-electrical-2.0.0.jar app.jar
 EXPOSE 8080
-
-# 5. Run application
 ENTRYPOINT ["java", "-jar", "app.jar"]
