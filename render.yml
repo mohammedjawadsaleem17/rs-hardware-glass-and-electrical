@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: spring-boot-service
+    env: docker
+    plan: free
+    autoDeploy: true
+    dockerfilePath: ./dockerfile
+    envVars:
+      - key: PORT
+        value: 8080

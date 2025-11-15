@@ -9,3 +9,5 @@ spring:
     mongodb:
       uri: mongodb+srv://rshardware:rshardware2210@cluster0.n0btfbz.mongodb.net/rshardware?retryWrites=true&w=majority
       database: rshardware
+server:
+  port: ${PORT:8080}

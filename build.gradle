@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.twoxplusone.rshardware'
-version = '0.0.1-SNAPSHOT'
+version = '2.0.0'
 description = 'Spring Boot backend for hs hardware'
 
 java {
