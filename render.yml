@@ -1,10 +1,10 @@
 services:
   - type: web
-    name: spring-boot-service
+    name: rs-hardware-backend
     env: docker
     plan: free
-    autoDeploy: true
-    dockerfilePath: ./dockerfile
+    dockerfilePath: ./Dockerfile
+    buildCommand: "./gradlew build"
     envVars:
       - key: PORT
         value: 8080
