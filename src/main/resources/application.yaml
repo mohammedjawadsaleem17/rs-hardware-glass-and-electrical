@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: rs-hardware-glass-and-electrical
+  security:
+    user:
+      name: jawad
+      password: jawad
+  data:
+    mongodb:
+      uri: mongodb+srv://rshardware:rshardware2210@cluster0.n0btfbz.mongodb.net/rshardware?retryWrites=true&w=majority
+      database: rshardware
