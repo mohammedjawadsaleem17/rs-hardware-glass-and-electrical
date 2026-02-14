@@ -20,7 +20,7 @@ public class SpringSecurity {
                     corsConfiguration.setAllowedMethods(List.of("PUT","PATCH","DELETE","GET","POST"));
                     corsConfiguration.setAllowCredentials(true);
                     corsConfiguration.setAllowedHeaders(List.of("*"));
-                    corsConfiguration.setAllowedOrigins(List.of("https://rshardwares.in","https://rs-hardware-glass-and-electrical.onrender.com","http://localhost:8080/"));
+                    corsConfiguration.setAllowedOrigins(List.of("https://rshardwares.in","http://localhost:5173","https://rs-hardware-glass-and-electrical.onrender.com","http://localhost:8080/"));
                     return corsConfiguration;
                 }))
                 .build();
