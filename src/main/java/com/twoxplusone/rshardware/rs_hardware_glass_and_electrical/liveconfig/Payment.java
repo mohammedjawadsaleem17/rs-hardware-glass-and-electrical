@@ -14,5 +14,7 @@ public enum Payment implements Feature   {
     PAYMENT_NOT_RECEIVED,
 
     @Label("bypas")
-    BYPASS
+    BYPASS,
+
+
 }

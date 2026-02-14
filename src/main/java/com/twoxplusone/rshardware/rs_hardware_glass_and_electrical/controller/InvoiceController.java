@@ -1,5 +1,7 @@
 package com.twoxplusone.rshardware.rs_hardware_glass_and_electrical.controller;
 
+import com.twoxplusone.rshardware.rs_hardware_glass_and_electrical.Email.EmailService;
+import com.twoxplusone.rshardware.rs_hardware_glass_and_electrical.Email.ScheduledEmailService;
 import com.twoxplusone.rshardware.rs_hardware_glass_and_electrical.Entity.CustomerInvoices;
 import com.twoxplusone.rshardware.rs_hardware_glass_and_electrical.liveconfig.Payment;
 import com.twoxplusone.rshardware.rs_hardware_glass_and_electrical.service.InvoiceService;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.togglz.core.manager.FeatureManager;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -20,6 +23,12 @@ public class InvoiceController {
 
     @Autowired
     private InvoiceService invoiceService;
+
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private ScheduledEmailService scheduledEmailService;
 
     @PostMapping("/create")
     public ResponseEntity<?> createInvoice(@RequestBody CustomerInvoices customerInvoices){
@@ -58,6 +67,13 @@ public class InvoiceController {
         else{
             return -1;
         }
+    }
+
+    @GetMapping("/email")
+    public ResponseEntity<?> sendEmail(){
+        String recipient = "abdulfahad1436@gmail.com";
+        emailService.sendEmail(recipient,"Payment Reminder - RS Hardware",scheduledEmailService.buildEmailBody(recipient, LocalDate.now()));
+        return new ResponseEntity<>("Sent",HttpStatus.OK);
     }
 
 

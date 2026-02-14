@@ -26,7 +26,7 @@ dependencies {
 	// Togglz dependencies
 	implementation 'org.togglz:togglz-spring-boot-starter:4.4.0'
 	implementation 'org.togglz:togglz-console:4.4.0'
-
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
