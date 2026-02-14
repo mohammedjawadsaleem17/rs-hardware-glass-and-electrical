@@ -26,3 +26,10 @@
     reply-to: support@rshardwares.in
     cc:
       address: mohammedjawadsaleem8@gmail.com
+
+  togglz:
+    enabled: true
+    console:
+      enabled: true
+      path: /togglz-console
+      secured: false   # for local/dev
