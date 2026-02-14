@@ -1,23 +1,38 @@
 package com.twoxplusone.rshardware.rs_hardware_glass_and_electrical.controller;
 
+import com.twoxplusone.rshardware.rs_hardware_glass_and_electrical.Email.EmailService;
+import com.twoxplusone.rshardware.rs_hardware_glass_and_electrical.Email.ScheduledEmailService;
 import com.twoxplusone.rshardware.rs_hardware_glass_and_electrical.Entity.CustomerInvoices;
+import com.twoxplusone.rshardware.rs_hardware_glass_and_electrical.liveconfig.Payment;
 import com.twoxplusone.rshardware.rs_hardware_glass_and_electrical.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.togglz.core.manager.FeatureManager;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @RequestMapping("/invoice")
 public class InvoiceController {
+
+    @Autowired
+    private FeatureManager featureManager;
+
     @Autowired
     private InvoiceService invoiceService;
 
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private ScheduledEmailService scheduledEmailService;
+
     @PostMapping("/create")
     public ResponseEntity<?> createInvoice(@RequestBody CustomerInvoices customerInvoices){
-        CustomerInvoices invoice = invoiceService.createInvoice(customerInvoices);
+        ResponseEntity<?> invoice = invoiceService.createInvoice(customerInvoices);
         return new ResponseEntity<>(invoice, HttpStatus.OK);
     }
     @GetMapping
@@ -40,6 +55,25 @@ public class InvoiceController {
     @GetMapping("/ping")
     public String ping(){
         return "Pong";
+    }
+
+    @GetMapping("/login")
+    public Integer loginUser(@RequestParam("username") String username,@RequestParam("password")String password){
+        if(featureManager.isActive(Payment.PAYMENT_RECEIVED)){
+            return 1;
+        }else if(featureManager.isActive(Payment.BYPASS)){
+            return 0;
+        }
+        else{
+            return -1;
+        }
+    }
+
+    @GetMapping("/email")
+    public ResponseEntity<?> sendEmail(){
+        String recipient = "abdulfahad1436@gmail.com";
+        emailService.sendEmail(recipient,"Payment Reminder - RS Hardware",scheduledEmailService.buildEmailBody(recipient, LocalDate.now()));
+        return new ResponseEntity<>("Sent",HttpStatus.OK);
     }
 
 

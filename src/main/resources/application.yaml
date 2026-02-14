@@ -1,13 +1,28 @@
-spring:
-  application:
-    name: rs-hardware-glass-and-electrical
-  security:
-    user:
-      name: jawad
-      password: jawad
-  data:
-    mongodb:
-      uri: mongodb+srv://rshardware:rshardware2210@cluster0.n0btfbz.mongodb.net/rshardware?retryWrites=true&w=majority
-      database: rshardware
-server:
-  port: ${PORT:8080}
+  spring:
+    application:
+      name: rs-hardware-glass-and-electrical
+
+    mail:
+      host: in-v3.mailjet.com
+      port: 587
+      username: efb50837051e2b9600e6518d652384b6
+      password: a3ea30b4f9bd6a4fb203d33680ed6f7d
+      properties:
+        mail.smtp.auth: true
+        mail.smtp.starttls.enable: true
+      default-encoding: UTF-8
+
+    data:
+      mongodb:
+        uri: mongodb+srv://rshardware:rshardware2210@cluster0.n0btfbz.mongodb.net/rshardware?retryWrites=true&w=majority
+        database: rshardware
+
+  server:
+    port: ${PORT:8080}
+
+  email:
+    from: noreply@rshardwares.in
+    from-name: RS Hardware
+    reply-to: support@rshardwares.in
+    cc:
+      address: mohammedjawadsaleem8@gmail.com
