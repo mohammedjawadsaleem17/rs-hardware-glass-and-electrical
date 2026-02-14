@@ -11,3 +11,20 @@ spring:
       database: rshardware
 server:
   port: ${PORT:8080}
+
+togglz:
+  enabled: true
+  feature-enums: com.twoxplusone.rshardware.rs_hardware_glass_and_electrical.liveconfig.Payment
+  console:
+    enabled: true
+    secured: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      enabled: true
+      show-components: ALWAYS
